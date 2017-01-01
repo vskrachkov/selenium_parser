@@ -1,2 +1,1 @@
 selenium
-git+https://github.com/ponty/pyvirtualdisplay
