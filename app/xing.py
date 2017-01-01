@@ -12,27 +12,22 @@ from selenium import webdriver
 logging.basicConfig(filename='.xing.log', level=logging.INFO,
                     format='%(asctime)s %(message)s')
 
-
-# with virtualdisplay(on=False):
 logging.info('Starting chrome_driver.')
-print(sys.platform)
 driver = webdriver.Chrome()
 
 logging.info('Getting initial url for searching companies.')
 companies = ('https://www.xing.com/companies/industries'
              '/170000-marketing-pr-and-design?page={}'.format(p)
              for p in range(1, 280 + 1))
-for company in companies:
-    logging.info('Company: {}'.format(company))
-    print(company)
+for num, company in enumerate(companies, start=1):
+    logging.info('======= Page number {}, url: {}'.format(num, company))
     driver.get(company)
-    time.sleep(.5)
+    time.sleep(.3)
     logging.info('Getting link to company page and go by this link.')
     elements = [elem.get_attribute('href') for elem
                 in driver.find_elements_by_xpath('//a[@class="company-link"]')]
     for href in elements:
         logging.info(href)
-        print(href)
         try:
             driver.get(href)
         except:
@@ -60,7 +55,6 @@ for company in companies:
                     for em in employees:
                         if not ('Anonymous' in em.text):
                             cols = em.text.split('\n')
-                            print(cols)
                             csw_writer.writerow(cols)
             except Exception as err:
                 logging.info('{} error when trying to get '
