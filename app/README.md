@@ -1,11 +1,11 @@
 ### Scrapping xing.com
-  For run `xing.py` you must build docker image and run container (assumed that the program is already installed).
+  For run `xing.py` you must build docker image and run container (assumed that docker  is already installed).
   Go to directory with Docerfile and execute following commands for this (take in mind that for linux users may be required `sudo`):
   ```
   docker build -t <image name> .
-  docker run xing
-  ```
-  Add flad `-d` if you want start container.
+  docker run <image name>
+ ```
+  Add flad `-d` if you want start container in daemon mode.
   If you want check your all existing containers execute:
   ``` 
   docker ps -a
